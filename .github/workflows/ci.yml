@@ -24,7 +24,7 @@ jobs:
 
       - name: Build with Maven
         run: |
-          mvn clean package -DskipTests
+          mvn -B package -DskipTests
 
       - name: BList Jar files
         run: |
