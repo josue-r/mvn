@@ -2,7 +2,7 @@ name: Master CI
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
 
 jobs:
   build:
@@ -83,3 +83,6 @@ jobs:
           context: .
           push: true
           tags: ${{ steps.prep.outputs.tags }}
+          build-args: |
+            DB_USER=${{ secrets.STORE_DB_USERNAME }}
+            DB_PASS=${{ secrets.STORE_DB_PASSWORD }}
