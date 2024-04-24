@@ -1,8 +1,8 @@
 # Use Alpine Linux as the base image for a lightweight container
 FROM alpine:latest
 
-# Install necessary dependencies for Corretto installation
-RUN apk --no-cache add curl binutils
+# # Install necessary dependencies for Corretto installation
+# RUN apk --no-cache add curl binutils
 
 # # Download and install Amazon Corretto
 # RUN curl -L https://corretto.aws/downloads/latest/amazon-corretto-11-x64-alpine-linux-jdk.tar.gz -o /tmp/corretto.tar.gz \
