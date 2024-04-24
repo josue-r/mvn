@@ -10,12 +10,15 @@ RUN apk --no-cache add curl binutils
 #     && rm /tmp/corretto.tar.gz \
 #     && ln -s /opt/amazon-corretto-*/bin/* /usr/bin/
 
-# Set JAVA_HOME environment variable
-ENV JAVA_HOME=/opt/amazon-corretto-11
-ENV PATH=$PATH:$JAVA_HOME/bin
+# # Set JAVA_HOME environment variable
+# ENV JAVA_HOME=/opt/amazon-corretto-11
+# ENV PATH=$PATH:$JAVA_HOME/bin
 
-# Verify installation
-RUN java -version
-
+# # Verify installation
+# RUN java -version
+ARG DB_USER
+ARG DB_PASS
+ENV SPRING_DATASOURCE_USERNAME=$DB_USER
+ENV SPRING_DATASOURCE_PASSWORD=$DB_PASS
 # Command to keep the container running
 CMD ["sh"]
