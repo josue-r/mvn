@@ -9,17 +9,14 @@ jobs:
 
     runs-on: ubuntu-latest
     
-    outputs:
-      appVersion: ${{ steps.prep.outputs.appVersion }}
-
-    steps:
+   steps:
       - uses: actions/checkout@v4
 
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v2
         with:
           registry: ghcr.io
-          username: ${{ github.actor }}
+          username: josue-r
           password: ${{ secrets.JRS_TOKEN }}
 
 
