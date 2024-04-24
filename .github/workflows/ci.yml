@@ -11,25 +11,31 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Login to GitHub Container Registry
-        uses: docker/login-action@v2
-        with:
-          registry: ghcr.io
-          username: josue-r
-          password: ${{ secrets.JRS_TOKEN }}
+      # - name: Login to GitHub Container Registry
+      #   uses: docker/login-action@v2
+      #   with:
+      #     registry: ghcr.io
+      #     username: josue-r
+      #     password: ${{ secrets.JRS_TOKEN }}
 
       - name: List current dsirectory
         run: |
           ls -l
+
+      - name: push to registry
+        run: |
+          docker login --username josue-r --password ${{ secrets.GH_PAT }} ghcr.io
+          docker build . -f wizeline-side.dockerfile --tag ghcr.io/josue-r/build-args-ghcr:latest --build-arg ${{ secrets.STORE_DB_USERNAME }} --build-arg ${{ secrets.STORE_DB_PASSWORD }}
+          docker push ghcr.io/josue-r/build-args-ghcr:latest
       
-      - name: Push to GitHub Packages
-        uses: docker/build-push-action@v3
-        with:
-          context: .
-          file: Dockerfile
-          push: true
-          tags: test1
-          build-args: |
-            APP_VERSION=1.0
-            DB_USER=${{ secrets.STORE_DB_USERNAME }}
-            DB_PASS=${{ secrets.STORE_DB_PASSWORD }}
+      # - name: Push to GitHub Packages
+      #   uses: docker/build-push-action@v3
+      #   with:
+      #     context: .
+      #     file: Dockerfile
+      #     push: true
+      #     tags: test1
+      #     build-args: |
+      #       APP_VERSION=1.0
+      #       DB_USER=${{ secrets.STORE_DB_USERNAME }}
+      #       DB_PASS=${{ secrets.STORE_DB_PASSWORD }}
